@@ -9,11 +9,12 @@
 
         private static void PrintIntro()
         {
-            TimedEvents.TimedWrite(
+            var introText = 
                 "\n\n\t\tLost and Found..." +
                 "\n\t\t\tThe Ultimate Survival Game..." +
-                "\n\n\t\t\tWritten and Developed by: Zach Hollis\n\n",
-                TimedEvents.WriteSpeed.Slow);
+                "\n\n\t\t\tWritten and Developed by: Zach Hollis\n\n";
+                
+            TimedEvents.TimedWrite(introText, TimedEvents.WriteSpeed.Slow);
         }
     }
 }
