@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace LostAndFound
+﻿namespace LostAndFound
 {
     public class Program
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
+            GameManager.StartGame();
         }
     }
 }
