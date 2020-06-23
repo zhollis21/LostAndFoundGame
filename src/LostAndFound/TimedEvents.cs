@@ -9,6 +9,11 @@ namespace LostAndFound
 
         public static void TimedWrite(string text, WriteSpeed speed = WriteSpeed.Normal)
         {
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
             foreach (char letter in text)
             {
                 Console.Write(letter);
