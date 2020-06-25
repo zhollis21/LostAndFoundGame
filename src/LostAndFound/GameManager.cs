@@ -4,6 +4,8 @@ namespace LostAndFound
 {
     public static class GameManager
     {
+        private enum MenuChoice { S, C, L, H, Q}
+
         public static void StartGame()
         {
             PrintIntro();
@@ -24,7 +26,7 @@ namespace LostAndFound
         private static void ManageGameActions()
         {
             PrintMainMenu();
-            char userInput = GetUserInput();
+            MenuChoice userInput = GetUserInput();
         }
 
         private static void PrintMainMenu()
@@ -40,17 +42,27 @@ namespace LostAndFound
             TimedEvents.TimedWrite(menuText, TimedEvents.WriteSpeed.Fast);
         }
 
-        private static char GetUserInput()
-        {
-            char userInput = char.ToLower(Console.ReadKey(true).KeyChar);
-
-            while(userInput != 's' && userInput != 'c' && userInput != 'l' && userInput != 'h' && userInput != 'q')
+        private static MenuChoice GetUserInput()
+        { 
+            while (true)
             {
-                Console.Write("\n\nYour input is not valid. Please select one of the Main Menu options.");
-                userInput = char.ToLower(Console.ReadKey(true).KeyChar);
-            }          
+                char userInput = char.ToUpper(Console.ReadKey(true).KeyChar);
 
-            return userInput;
+                if (userInput == 'S')
+                    return MenuChoice.S;
+
+                if (userInput == 'C')
+                    return MenuChoice.C;
+
+                if (userInput == 'L')
+                    return MenuChoice.L;
+
+                if (userInput == 'H')
+                    return MenuChoice.H;
+
+                if (userInput == 'Q')
+                    return MenuChoice.Q;
+            }
         }
     }
 }
