@@ -11,6 +11,8 @@ namespace LostAndFound
             PrintIntro();
 
             ManageMenuActions();
+
+            TimedEvents.TimedWrite("\n\n\tThank you for playing!", TimedEvents.WriteSpeed.Slow);
         }
 
         private static void PrintIntro()
@@ -52,8 +54,6 @@ namespace LostAndFound
                     HelpUser();
                 }
             } while (userMenuChoice != MenuChoice.Quit);
-
-            TimedEvents.TimedWrite("\n\n\tThank you for playing!", TimedEvents.WriteSpeed.Slow);
         }
 
         private static void PrintMainMenu()
