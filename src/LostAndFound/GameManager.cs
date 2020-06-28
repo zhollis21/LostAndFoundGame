@@ -10,7 +10,7 @@ namespace LostAndFound
         {
             PrintIntro();
 
-            ManageGameActions();
+            Manages();
         }
 
         private static void PrintIntro()
