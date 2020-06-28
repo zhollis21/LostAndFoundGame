@@ -4,7 +4,7 @@ namespace LostAndFound
 {
     public static class GameManager
     {
-        private enum MenuChoice { Start, Continue, Leaderboard, Help, Quit }
+        private enum MenuChoice { Start, Continue, Leaderboards, Help, Quit }
 
         public static void StartGame()
         {
@@ -25,33 +25,35 @@ namespace LostAndFound
 
         private static void ManageMenuActions()
         {
-            PrintMainMenu();
-            MenuChoice userMenuChoice = GetUserMenuChoice();
+            MenuChoice userMenuChoice;
 
-            if (userMenuChoice == MenuChoice.Start)
+            do
             {
-                Game.StartNewGame();
-            }
+                PrintMainMenu();
+                userMenuChoice = GetUserMenuChoice();
 
-            if (userMenuChoice == MenuChoice.Continue)
-            {
-                Game.ContinuePreviousGame();
-            }
+                if (userMenuChoice == MenuChoice.Start)
+                {
+                    Game.StartNewGame();
+                }
 
-            if (userMenuChoice == MenuChoice.Leaderboard)
-            {
-                PrintLeaderboard();
-            }
+                if (userMenuChoice == MenuChoice.Continue)
+                {
+                    Game.ContinuePreviousGame();
+                }
 
-            if (userMenuChoice == MenuChoice.Help)
-            {
-                HelpUser();
-            }
+                if (userMenuChoice == MenuChoice.Leaderboards)
+                {
+                    PrintLeaderboards();
+                }
 
-            if (userMenuChoice == MenuChoice.Quit)
-            {
-                TimedEvents.TimedWrite("\n\n\tThank you for playing!", TimedEvents.WriteSpeed.Slow);
-            }
+                if (userMenuChoice == MenuChoice.Help)
+                {
+                    HelpUser();
+                }
+            } while (userMenuChoice != MenuChoice.Quit);
+
+            TimedEvents.TimedWrite("\n\n\tThank you for playing!", TimedEvents.WriteSpeed.Slow);
         }
 
         private static void PrintMainMenu()
@@ -60,7 +62,7 @@ namespace LostAndFound
                 "\n\nMain Menu:\n\t" +
                 "Press 'S' to Start a New Game\n\t" +
                 "Press 'C' to Continue a Previous Game\n\t" +
-                "Press 'L' to View the Leaderboard\n\t" +
+                "Press 'L' to View the Leaderboards\n\t" +
                 "Press 'H' for Help and FAQ\n\t" +
                 "Press 'Q' to Quit\n";
 
@@ -80,7 +82,7 @@ namespace LostAndFound
                     return MenuChoice.Continue;
 
                 if (userMenuChoice == 'L')
-                    return MenuChoice.Leaderboard;
+                    return MenuChoice.Leaderboards;
 
                 if (userMenuChoice == 'H')
                     return MenuChoice.Help;
@@ -90,7 +92,7 @@ namespace LostAndFound
             }
         }
 
-        private static void PrintLeaderboard()
+        private static void PrintLeaderboards()
         {
             Console.WriteLine("\nPrinting the Leaderboad...");
         }
@@ -98,7 +100,7 @@ namespace LostAndFound
         private static void HelpUser()
         {
             string helpText =
-                "\n\nHelp:\n\t" +                
+                "\n\nHelp:\n\t" +
                 "\n\tLost and Found is all about making smart choices.\n\t" +
                 "The game gives you the freedom to do anything you wish, but those choices might have swift consequences...\n\t" +
                 "\n\tHaving trouble surviving?\n\t" +
@@ -115,6 +117,8 @@ namespace LostAndFound
                 "\n\nPress anything to return to the Main Menu...\n";
 
             TimedEvents.TimedWrite(helpText, TimedEvents.WriteSpeed.Fast);
+
+            Console.ReadKey(true);
         }
     }
 }
