@@ -21,8 +21,10 @@ jobs:
       working-directory: ./src
       run: dotnet restore
     - name: Build
+      working-directory: ./src
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      working-directory: ./src
       run: dotnet test --no-restore --verbosity normal
     - name: dotnet-format
       uses: xt0rted/dotnet-format@v1.0.1
