@@ -26,10 +26,3 @@ jobs:
     - name: Test
       working-directory: ./src
       run: dotnet test --no-restore --verbosity normal
-    - name: dotnet-format
-      uses: xt0rted/dotnet-format@v1.0.1
-      with:
-        # The GITHUB_TOKEN secret
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        # Only changed files in the current pull request should be formatted
-        only-changed-files: true
