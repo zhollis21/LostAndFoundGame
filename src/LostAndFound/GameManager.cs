@@ -4,13 +4,15 @@ namespace LostAndFound
 {
     public static class GameManager
     {
-        private enum MenuChoice { Start, Continue, Leaderboards, Help, Quit}
+        private enum MenuChoice { Start, Continue, Leaderboards, Help, Quit }
 
         public static void StartGame()
         {
             PrintIntro();
 
-            ManageGameActions();
+            ManageMenuActions();
+
+            TimedEvents.TimedWrite("\n\n\tThank you for playing!", TimedEvents.WriteSpeed.Slow);
         }
 
         private static void PrintIntro()
@@ -23,10 +25,35 @@ namespace LostAndFound
             TimedEvents.TimedWrite(introText, TimedEvents.WriteSpeed.Slow);
         }
 
-        private static void ManageGameActions()
+        private static void ManageMenuActions()
         {
-            PrintMainMenu();
-            MenuChoice userMenuChoice = GetUserMenuChoice();
+            MenuChoice userMenuChoice;
+
+            do
+            {
+                PrintMainMenu();
+                userMenuChoice = GetUserMenuChoice();
+
+                if (userMenuChoice == MenuChoice.Start)
+                {
+                    Game.StartNewGame();
+                }
+
+                if (userMenuChoice == MenuChoice.Continue)
+                {
+                    Game.ContinuePreviousGame();
+                }
+
+                if (userMenuChoice == MenuChoice.Leaderboards)
+                {
+                    PrintLeaderboards();
+                }
+
+                if (userMenuChoice == MenuChoice.Help)
+                {
+                    HelpUser();
+                }
+            } while (userMenuChoice != MenuChoice.Quit);
         }
 
         private static void PrintMainMenu()
@@ -43,7 +70,7 @@ namespace LostAndFound
         }
 
         private static MenuChoice GetUserMenuChoice()
-        { 
+        {
             while (true)
             {
                 char userMenuChoice = char.ToUpper(Console.ReadKey(true).KeyChar);
@@ -63,6 +90,35 @@ namespace LostAndFound
                 if (userMenuChoice == 'Q')
                     return MenuChoice.Quit;
             }
+        }
+
+        private static void PrintLeaderboards()
+        {
+            Console.WriteLine("\nPrinting the Leaderboad...");
+        }
+
+        private static void HelpUser()
+        {
+            string helpText =
+                "\n\nHelp:\n\t" +
+                "\n\tLost and Found is all about making smart choices.\n\t" +
+                "The game gives you the freedom to do anything you wish, but those choices might have swift consequences...\n\t" +
+                "\n\tHaving trouble surviving?\n\t" +
+                "Health can be recovered by sleeping or keeping your hunger level moderate to full.\n\t" +
+                "Try to limit your exploring until to have some food stored up.\n\t" +
+                "When exploring, try making a sturdy camp in the center of a region to use as a base of operations.\n\t" +
+                "\n\tDoes your game freeze up when you select \"Continue\"?\n\t" +
+                "Most likely your game data file has been moved or corrupted.\n\t" +
+                "Unfortunately you will need to start a new game.\n\t" +
+                "\n\tEncountering bugs or glitches?\n\t" +
+                "Contact the developers at: zhollis21@gmail.com\n\t" +
+                "Be sure to include a detailed discription of the problem and a screenshot if possible.\n\t" +
+                "\n\tThanks for playing!" +
+                "\n\nPress anything to return to the Main Menu...\n";
+
+            TimedEvents.TimedWrite(helpText, TimedEvents.WriteSpeed.Fast);
+
+            Console.ReadKey(true);
         }
     }
 }
