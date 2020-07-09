@@ -4,7 +4,7 @@ namespace LostAndFound
 {
     public static class Game
     {
-        private enum MenuChoice { Explore, GatherFood, BuildFortifyCamp, Inventory, MainMenu }
+        private enum MenuChoice { Explore, GatherFood, BuildOrFortifyCamp, Inventory, MainMenu }
 
         public static void StartNewGame()
         {
@@ -74,7 +74,7 @@ namespace LostAndFound
                     return MenuChoice.GatherFood;
 
                 if (userMenuChoice == 'B')
-                    return MenuChoice.BuildFortifyCamp;
+                    return MenuChoice.BuildOrFortifyCamp;
 
                 if (userMenuChoice == 'I')
                     return MenuChoice.Inventory;
