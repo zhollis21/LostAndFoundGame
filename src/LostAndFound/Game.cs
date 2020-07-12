@@ -4,6 +4,8 @@ namespace LostAndFound
 {
     public static class Game
     {
+        private enum MenuChoice { Explore, GatherFood, BuildOrFortifyCamp, Inventory, MainMenu }
+
         public static void StartNewGame()
         {
             TimedEvents.TimedWrite(
@@ -36,8 +38,15 @@ namespace LostAndFound
 
         private static void ManageGameActions()
         {
-            PrintGameActionsMenu();
-            GetUserGameActionsMenuChoice();
+            MenuChoice userMenuChoice;
+
+            do
+            {
+                PrintGameActionsMenu();
+                userMenuChoice = GetUserGameActionsMenuChoice();
+                // TODO: check if userMenuChoice is any of the other options and tell it what to do.
+
+            } while (userMenuChoice != MenuChoice.MainMenu);
         }
 
         private static void PrintGameActionsMenu()
@@ -52,10 +61,27 @@ namespace LostAndFound
                 TimedEvents.WriteSpeed.Fast);
         }
 
-        private static char GetUserGameActionsMenuChoice()
+        private static MenuChoice GetUserGameActionsMenuChoice()
         {
-            // TODO
-            return 'a';
+            while (true)
+            {
+                char userMenuChoice = char.ToUpper(Console.ReadKey(true).KeyChar);
+
+                if (userMenuChoice == 'E')
+                    return MenuChoice.Explore;
+
+                if (userMenuChoice == 'G')
+                    return MenuChoice.GatherFood;
+
+                if (userMenuChoice == 'B')
+                    return MenuChoice.BuildOrFortifyCamp;
+
+                if (userMenuChoice == 'I')
+                    return MenuChoice.Inventory;
+
+                if (userMenuChoice == 'M')
+                    return MenuChoice.MainMenu;
+            }
         }
 
         private static bool IsUserInputYes()
