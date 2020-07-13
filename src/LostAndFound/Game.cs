@@ -2,9 +2,11 @@
 
 namespace LostAndFound
 {
-    public static class Game
+    public class Game
     {
         private enum MenuChoice { Explore, GatherFood, BuildOrFortifyCamp, Inventory, MainMenu }
+
+        private int _day = 1;
 
         public static void StartNewGame()
         {
@@ -113,6 +115,11 @@ namespace LostAndFound
                 "You tell yourself to just sit down and figure it out.\n\n\t" +
                 "Okay, so you are lost in the middle of a forest...\n\t",
                 TimedEvents.WriteSpeed.Slow);
+        }
+
+        private static void PrintGameStatus()
+        {
+
         }
     }
 }
